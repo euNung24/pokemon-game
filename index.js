@@ -126,8 +126,12 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
         rectangle1.position.y <= rectangle2.position.y + rectangle2.height
     )
 }
+
+const battle = {
+    initiated: false,
+};
 function animate() {
-    window.requestAnimationFrame(animate);
+    const animationId = window.requestAnimationFrame(animate);
     background.draw();
     boundaries.forEach(boundary => boundary.draw());
     battleZones.forEach(battleZone => battleZone.draw());
@@ -137,6 +141,11 @@ function animate() {
     let moving = true;
     player.moving = false;
 
+    if (battle.initiated) {
+        return;
+    }
+
+    // activate a battle
     if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
         for (let i = 0; i < battleZones.length; i++) {
             const battleZone = battleZones[i];
@@ -154,7 +163,25 @@ function animate() {
                 && overlappingArea > (player.width * player.height) / 2
                 && Math.random() < 0.01 //  배틀존에서 다닐 때 랜덤으로 배틀하기 위함
             ) {
-                console.log('battle zone');
+                console.log('activate battle');
+                // deactivate current animation loop
+                window.cancelAnimationFrame(animationId);
+                battle.initiated = true;
+                gsap.to("#overlappingDiv", {
+                    opacity: 1,
+                    repeat: 3,
+                    yoyo: true,
+                    duration: 0.4,
+                    onComplete: () => {
+                        gsap.to("#overlappingDiv", {
+                            opacity: 1,
+                            duration: 0.4,
+                        })
+
+                        // activate a new animation loop
+                        animateBattle();
+                    }
+                });
                 break;
             }
         }
@@ -285,6 +312,11 @@ function animate() {
 }
 
 animate();
+
+function animateBattle() {
+    window.requestAnimationFrame(animateBattle);
+    console.log('animation battle');
+}
 
 let lastKey = '';   // 첫번째 키를 누른 상태로 두번째 키를 눌렀을 때 동작을 처리하기 위함
 window.addEventListener('keydown', (e) => {

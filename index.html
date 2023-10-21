@@ -7,13 +7,27 @@
         body {
             background: #000;
         }
+        #overlappingDiv {
+            background-color: #000;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
-<canvas></canvas>
-<script src="./data/collisions.js"></script>
-<script src="./data/battleZones.js"></script>
-<script src="./classes.js"></script>
-<script src="./index.js"></script>
+    <div style="display: inline-block; position: relative">
+        <div id="overlappingDiv"></div>
+        <canvas></canvas>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./data/collisions.js"></script>
+    <script src="./data/battleZones.js"></script>
+    <script src="./classes.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>
