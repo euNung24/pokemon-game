@@ -167,19 +167,28 @@ function animate() {
                 // deactivate current animation loop
                 window.cancelAnimationFrame(animationId);
                 battle.initiated = true;
+                // flash 효과
                 gsap.to("#overlappingDiv", {
                     opacity: 1,
                     repeat: 3,
                     yoyo: true,
                     duration: 0.4,
+                    // 검은 배경으로 마무리
                     onComplete: () => {
                         gsap.to("#overlappingDiv", {
                             opacity: 1,
                             duration: 0.4,
+                            // battle 배경으로 바꾼 후 검은 배경 효과 제거
+                            onComplete() {
+                                // activate a new animation loop
+                                animateBattle();
+                                gsap.to("#overlappingDiv", {
+                                    opacity: 0,
+                                    duration: 0.4,
+                                })
+                            }
                         })
 
-                        // activate a new animation loop
-                        animateBattle();
                     }
                 });
                 break;
@@ -311,12 +320,25 @@ function animate() {
     }
 }
 
-animate();
+// animate();
 
+const battleBackgroundImage = new Image();
+battleBackgroundImage.src = './img/battleBackground.png';
+const battleBackground = new Sprite({
+    position: {
+        x: 0,
+        y: 0,
+    },
+    image: battleBackgroundImage
+})
 function animateBattle() {
     window.requestAnimationFrame(animateBattle);
     console.log('animation battle');
+    battleBackground.draw();
+
 }
+
+animateBattle();
 
 let lastKey = '';   // 첫번째 키를 누른 상태로 두번째 키를 눌렀을 때 동작을 처리하기 위함
 window.addEventListener('keydown', (e) => {
