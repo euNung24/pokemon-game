@@ -4,6 +4,7 @@ const ctx = canvas.getContext('2d');
 // 16 : 9 비율
 canvas.width = 1024;
 canvas.height = 576;
+canvas.parentElement.style.height = canvas.height + 'px';
 
 const collisionsMap = [];
 for (let i = 0; i < collisions.length; i += 70) {

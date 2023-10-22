@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Pokemon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
+        * {
+            font-family: 'Press Start 2P';
+        }
         body {
             background: #000;
+        }
+        h1 {
+            margin: 0;
+        }
+        button {
+            border: 0;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #ddd;
+            cursor: pointer;
         }
         #overlappingDiv {
             background-color: #000;
@@ -17,12 +34,49 @@
             opacity: 0;
             pointer-events: none;
         }
+        #attackZone {
+            display: flex;
+            background-color: #fff;
+            height: 140px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-top: 4px solid #000;
+        }
+        .attacks {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            width: 66.66%;
+        }
+        .attackType {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 33.33%;
+            border-left: 4px solid #000;
+        }
+        .attackType h1 {
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
     <div style="display: inline-block; position: relative">
         <div id="overlappingDiv"></div>
         <canvas></canvas>
+
+        <div id="attackZone">
+            <div class="attacks">
+                <button>Attack1</button>
+                <button>Attack2</button>
+                <button>Attack3</button>
+                <button>Attack4</button>
+            </div>
+            <div class="attackType">
+                <h1>Attack Type</h1>
+            </div>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./data/collisions.js"></script>
