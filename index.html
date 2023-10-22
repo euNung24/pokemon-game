@@ -34,6 +34,41 @@
             opacity: 0;
             pointer-events: none;
         }
+        .spriteInfo {
+            position: absolute;
+            background-color: #fff;
+            width: 250px;
+            border: 4px solid #000;
+            padding: 12px;
+        }
+        .spriteInfo h1 {
+            font-size: 16px;
+        }
+        .healthInfo {
+            position: relative;
+        }
+        .spriteInfo .healthInfo .wholeHealth {
+            height: 5px;
+            margin-top: 10px;
+            background-color: #ccc;
+        }
+        .spriteInfo .healthInfo .spriteHealth {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background-color: #008000FF;
+        }
+        #enemyHealth {
+            top: 50px;
+            left: 50px;
+        }
+        #playerHealth {
+            top: 300px;
+            right: 50px;
+        }
         #attackZone {
             display: flex;
             background-color: #fff;
@@ -64,14 +99,31 @@
 <body>
     <div style="display: inline-block; position: relative">
         <div id="overlappingDiv"></div>
+
+        <div id="enemyHealth" class="spriteInfo">
+            <h1>Draggle</h1>
+            <div class="healthInfo">
+                <div class="wholeHealth"></div>
+                <div class="spriteHealth"></div>
+            </div>
+        </div>
+
+        <div id="playerHealth" class="spriteInfo">
+            <h1>Emby</h1>
+            <div class="healthInfo">
+                <div class="wholeHealth"></div>
+                <div class="spriteHealth"></div>
+            </div>
+        </div>
+
         <canvas></canvas>
 
         <div id="attackZone">
             <div class="attacks">
                 <button>Attack1</button>
                 <button>Attack2</button>
-                <button>Attack3</button>
-                <button>Attack4</button>
+<!--                <button>Attack3</button>-->
+<!--                <button>Attack4</button>-->
             </div>
             <div class="attackType">
                 <h1>Attack Type</h1>
