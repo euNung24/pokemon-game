@@ -11,6 +11,7 @@ class Sprite {
                     animate,
                     isEnemy = false,
                     rotation = 0,
+                    name,
     }) {
         this.position = position;
         this.velocity = velocity;
@@ -27,6 +28,7 @@ class Sprite {
         this.health = 100;
         this.isEnemy = isEnemy;
         this.rotation = rotation;
+        this.name = name;
     }
 
     draw() {
@@ -63,6 +65,9 @@ class Sprite {
     }
 
     attack({ attack, recipient, renderedSprites }) {
+        document.querySelector('#dialogBox').style.display = "block";
+        document.querySelector('#dialogBox').innerHTML = `${this.name} used ${attack.name}`;
+
         let healthBar = '#enemyHealth .spriteHealth';
         if (this.isEnemy) healthBar = '#playerHealth .spriteHealth';
 

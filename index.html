@@ -79,6 +79,17 @@
             left: 0;
             border-top: 4px solid #000;
         }
+        #dialogBox {
+            display: none;
+            padding: 12px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #fff;
+            cursor: pointer;
+        }
         .attacks {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -119,6 +130,7 @@
         <canvas></canvas>
 
         <div id="attackZone">
+            <div id="dialogBox"></div>
             <div class="attacks">
                 <button>Tackle</button>
                 <button>Fireball</button>
@@ -134,5 +146,6 @@
     <script src="./data/attacks.js"></script>
     <script src="./classes.js"></script>
     <script src="./index.js"></script>
+    <script src="./battleScene.js"></script>
 </body>
 </html>
