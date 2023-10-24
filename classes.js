@@ -1,17 +1,15 @@
 class Sprite {
     constructor({
-                    position,
-                    velocity,
-                    image,
-                    frames = {
-                        max: 1,
-                        hold: 10
-                    },
-                    sprites,
-                    animate,
-                    isEnemy = false,
-                    rotation = 0,
-                    name,
+        position,
+        velocity,
+        image,
+        frames = {
+            max: 1,
+            hold: 10
+        },
+        sprites,
+        animate,
+        rotation = 0,
     }) {
         this.position = position;
         this.velocity = velocity;
@@ -25,10 +23,7 @@ class Sprite {
         this.sprites = sprites;
         this.animate = animate;
         this.opacity = 1;
-        this.health = 100;
-        this.isEnemy = isEnemy;
         this.rotation = rotation;
-        this.name = name;
     }
 
     draw() {
@@ -63,7 +58,38 @@ class Sprite {
             }
         }
     }
+}
 
+class Monster extends Sprite {
+    constructor({
+        position,
+        velocity,
+        image,
+        frames = {
+            max: 1,
+            hold: 10
+        },
+        sprites,
+        animate,
+        rotation = 0,
+        isEnemy = false,
+        name,
+        attacks,
+    }) {
+        super({
+            position,
+            velocity,
+            image,
+            frames,
+            sprites,
+            animate,
+            rotation,
+        });
+        this.health = 100;
+        this.isEnemy = isEnemy;
+        this.name = name;
+        this.attacks = attacks;
+    }
     attack({ attack, recipient, renderedSprites }) {
         document.querySelector('#dialogBox').style.display = "block";
         document.querySelector('#dialogBox').innerHTML = `${this.name} used ${attack.name}`;
