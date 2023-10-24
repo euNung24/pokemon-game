@@ -1,5 +1,16 @@
 class Sprite {
-    constructor({position, velocity, image, frames = { max: 1, hold: 10 }, sprites, animate }) {
+    constructor({
+                    position,
+                    velocity,
+                    image,
+                    frames = {
+                        max: 1,
+                        hold: 10
+                    },
+                    sprites,
+                    animate,
+                    isEnemy = false,
+    }) {
         this.position = position;
         this.velocity = velocity;
         this.image = image;
@@ -11,9 +22,14 @@ class Sprite {
         this.moving = false;
         this.sprites = sprites;
         this.animate = animate;
+        this.opacity = 1;
+        this.health = 100;
+        this.isEnemy = isEnemy
     }
 
     draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
         ctx.drawImage(
             this.image,
             this.frames.val * this.width,
@@ -25,7 +41,7 @@ class Sprite {
             this.image.width / this.frames.max,
             this.image.height
         );
-
+        ctx.restore();
         if (!this.animate) {
             return;
         }
@@ -39,6 +55,46 @@ class Sprite {
                 this.frames.val = 0;
             }
         }
+    }
+
+    attack({ attack, recipient }) {
+        const tl = gsap.timeline();
+        this.health -= attack.damage;
+
+        let movementDistance = 20;
+        if (this.isEnemy) movementDistance = -20;
+
+        let healthBar = '#enemyHealth .spriteHealth';
+        if (this.isEnemy) healthBar = '#playerHealth .spriteHealth'
+
+        tl.to(this.position, {
+            x: this.position.x - movementDistance
+        }).to(this.position, {
+            x: this.position.x + movementDistance * 2,
+            duration: 0.1,
+            onComplete: () => {
+                // Enemy actually gets hit
+                gsap.to(healthBar, {
+                    width: this.health + '%',
+                })
+
+                gsap.to(recipient.position, {
+                    x: recipient.position.x + 10,
+                    yoyo: true,
+                    repeat: 5,
+                    duration: 0.08,
+                });
+
+                gsap.to(recipient, {
+                    opacity: 0,
+                    yoyo: true,
+                    repeat: 5,
+                    duration: 0.08,
+                })
+            }
+        }).to(this.position, {
+            x: this.position.x
+        })
     }
 }
 

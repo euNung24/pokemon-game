@@ -165,7 +165,6 @@ function animate() {
                 && overlappingArea > (player.width * player.height) / 2
                 && Math.random() < 0.01 //  배틀존에서 다닐 때 랜덤으로 배틀하기 위함
             ) {
-                console.log('activate battle');
                 // deactivate current animation loop
                 window.cancelAnimationFrame(animationId);
                 battle.initiated = true;
@@ -250,7 +249,6 @@ function animate() {
                     }
                 }
             })) {
-                console.log('collision');
                 moving = false;
                 break;
             }
@@ -281,7 +279,6 @@ function animate() {
                     }
                 }
             })) {
-                console.log('collision');
                 moving = false;
                 break;
             }
@@ -311,7 +308,6 @@ function animate() {
                     }
                 }
             })) {
-                console.log('collision');
                 moving = false;
                 break;
             }
@@ -348,6 +344,7 @@ const draggle = new Sprite({
         hold: 30,
     },
     animate: true,
+    isEnemy: true
 });
 
 const embyImage = new Image();
@@ -368,13 +365,25 @@ const emby = new Sprite({
 
 function animateBattle() {
     window.requestAnimationFrame(animateBattle);
-    console.log('animation battle');
     battleBackground.draw();
     draggle.draw();
     emby.draw();
 }
 
 animateBattle();
+
+document.querySelectorAll('.attacks button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        emby.attack({
+            attack: {
+                name: 'Tackle',
+                damage: 10,
+                type: 'Normal'
+            },
+            recipient: draggle
+        });
+    });
+});
 
 let lastKey = '';   // 첫번째 키를 누른 상태로 두번째 키를 눌렀을 때 동작을 처리하기 위함
 window.addEventListener('keydown', (e) => {
