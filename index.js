@@ -182,6 +182,7 @@ function animate() {
                             // battle 배경으로 바꾼 후 검은 배경 효과 제거
                             onComplete() {
                                 // activate a new animation loop
+                                initBattle();
                                 animateBattle();
                                 gsap.to("#overlappingDiv", {
                                     opacity: 0,

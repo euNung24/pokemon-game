@@ -33,6 +33,7 @@
             left: 0;
             opacity: 0;
             pointer-events: none;
+            z-index: 10;
         }
         .spriteInfo {
             position: absolute;
@@ -111,29 +112,29 @@
     <div style="display: inline-block; position: relative">
         <div id="overlappingDiv"></div>
 
-        <div id="enemyHealth" class="spriteInfo">
-            <h1>Draggle</h1>
-            <div class="healthInfo">
-                <div class="wholeHealth"></div>
-                <div class="spriteHealth"></div>
-            </div>
-        </div>
-
-        <div id="playerHealth" class="spriteInfo">
-            <h1>Emby</h1>
-            <div class="healthInfo">
-                <div class="wholeHealth"></div>
-                <div class="spriteHealth"></div>
-            </div>
-        </div>
-
         <canvas></canvas>
 
-        <div id="attackZone">
-            <div id="dialogBox"></div>
-            <div class="attacks"></div>
-            <div class="attackType">
-                <h1>Attack Type</h1>
+        <div id="userInterface">
+            <div id="enemyHealth" class="spriteInfo">
+                <h1>Draggle</h1>
+                <div class="healthInfo">
+                    <div class="wholeHealth"></div>
+                    <div class="spriteHealth"></div>
+                </div>
+            </div>
+            <div id="playerHealth" class="spriteInfo">
+                <h1>Emby</h1>
+                <div class="healthInfo">
+                    <div class="wholeHealth"></div>
+                    <div class="spriteHealth"></div>
+                </div>
+            </div>
+            <div id="attackZone">
+                <div id="dialogBox"></div>
+                <div class="attacks"></div>
+                <div class="attackType">
+                    <h1>Attack Type</h1>
+                </div>
             </div>
         </div>
     </div>
