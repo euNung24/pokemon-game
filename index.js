@@ -167,6 +167,11 @@ function animate() {
             ) {
                 // deactivate current animation loop
                 window.cancelAnimationFrame(animationId);
+
+                audio.Map.stop();
+                audio.initBattle.play();
+                audio.battle.play();
+
                 battle.initiated = true;
                 // flash 효과
                 gsap.to("#overlappingDiv", {
@@ -371,5 +376,13 @@ window.addEventListener('keyup', (e) => {
         default: {
             break;
         }
+    }
+})
+
+let clicked = false;
+window.addEventListener('click', () => {
+    if (!clicked) {
+        audio.Map.play();
+        clicked = true;
     }
 })
